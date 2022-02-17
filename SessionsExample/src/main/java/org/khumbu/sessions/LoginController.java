@@ -2,6 +2,7 @@ package org.khumbu.sessions;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -35,6 +36,8 @@ public class LoginController extends HttpServlet {
 			request.getSession().invalidate();
 			HttpSession newSession= request.getSession(true);
 			newSession.setMaxInactiveInterval(300);
+			Cookie cUsername= new Cookie("username",username);
+			response.addCookie(cUsername);
 			response.sendRedirect("home.jsp");
 		}
 		else
